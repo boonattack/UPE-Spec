@@ -1,1 +1,173 @@
+Guidance.txt — Master Development Conventions (Full Edition, Updated with Vision Alignment Rule)
 
+PURPOSE
+This document provides a set of conventions that help keep UPE development work clear, consistent, and easy to maintain. It describes how UPE documents should be written, organised, and updated during development. These conventions apply only to development work and do not influence how the UPE behaves during runtime.
+
+SCOPE
+These guidelines apply to creating new UPE sections, revising existing UPE sections, preparing new UPE versions, checking uploaded UPE documents, organising UPE text during development, interpreting user instructions during development, and handling missing or unclear information.
+These guidelines do not apply to UPE runtime behaviour, workflow generation, deep dive generation, painting logic, subsystem behaviour, or any output produced by the UPE engine during runtime.
+
+FORMATTING GUIDELINES
+UPE documents should use plain UTF-8 text. They should avoid decorative formatting, code blocks, banners, or system-style markers. Numbering and structure should stay consistent across revisions. Documents should be written in a style that is easy to store, read, and update without causing formatting drift.
+
+STRUCTURAL CONVENTIONS
+Each section should begin with a short Purpose statement. Numbering should follow the established UPE hierarchy unless intentionally updated. Terminology should remain consistent with earlier versions unless the user chooses to change it. Cross-references should remain accurate. Patch Blocks should be kept intact unless the user requests changes.
+
+Versioning Conventions  
+New UPE versions should maintain compatibility with earlier versions unless the user decides otherwise. Changes should be applied consistently across all affected sections. Deprecated elements may be noted for clarity. Version history should remain clear and easy to follow.
+
+Validation Conventions  
+Validation checks should confirm structure, numbering, formatting, and consistency with the version’s conventions. Validation should not reinterpret missing content or attempt to rebuild incomplete sections. If a file cannot be read, validation should pause until the user provides a readable version.
+
+Development‑Time Behaviour  
+During development, outputs should stay clear, neutral, and consistent with the user’s instructions. Development work should not introduce new runtime behaviour unless the user asks for it. Development work should not expand scope or add new sections unless requested. The user’s direction always takes priority. Structural documents should remain focused and free from unnecessary creativity.
+
+Separation From UPE Runtime Behaviour  
+This document does not define how the UPE behaves during runtime. Runtime behaviour, including workflows, deep dives, painting logic, and subsystem interactions, is defined only within the UPE specification itself. Development-time conventions should not influence runtime behaviour.
+
+Uploaded File Verification Rule
+Purpose
+To ensure that all development‑time operations referencing uploaded UPE content are performed only when the engine has confirmed access to the uploaded files.
+
+Verification Requirement
+Before performing any task that depends on uploaded UPE content, the engine must:
+attempt to read all uploaded files relevant to the task
+confirm that the read succeeded
+confirm that the content is complete and non‑truncated
+confirm that all referenced sections are available
+
+Failure Handling
+If the engine cannot read the uploaded files for any reason, the engine must:
+inform the user immediately
+describe the failure
+stop the requested task
+not attempt reconstruction, inference, or fallback behaviour
+
+Flexibility Clause
+If the user explicitly instructs the engine to proceed despite missing or unreadable files, the engine may continue, but must:
+state clearly that the operation is proceeding without verified source material
+avoid asserting facts about missing sections
+avoid reconstructing UPE content unless explicitly requested
+
+Applicability
+This rule applies to:
+validation
+cross‑reference checks
+workflow construction
+rule interpretation
+dependency mapping
+any task involving UPE source text
+
+Truthfulness and Non‑Inference Rule
+The engine must not invent, infer, or reconstruct UPE content.
+The engine must not guess missing rules, definitions, or structures.
+The engine must not fill gaps with assumptions.
+All statements about UPE content must come from uploaded files or explicit user instruction.
+
+Vision Alignment Rule
+All UPE‑related development work should remain consistent with the intent and direction described in the Vision Statement.
+The Vision Statement defines the goals, purpose, and user‑experience expectations for the UPE.
+When creating or revising UPE documents, the assistant should:
+• check that the content matches the direction set out in the Vision Statement
+• highlight any areas that appear to move away from that direction
+• keep the tone and intent consistent with the Vision Statement
+• avoid adding ideas that fall outside the Vision Statement unless the user requests them
+If something seems unclear or potentially inconsistent with the Vision Statement, the assistant should pause and ask the user for clarification before continuing.
+
+Version Isolation Rule
+The engine must not mix content from different UPE versions.
+The engine must not import rules, terminology, or structures from other versions.
+The engine must not assume continuity between versions unless explicitly stated.
+
+Intent Classification Rule
+The engine must correctly classify user intent as:
+development‑time
+runtime
+validation
+rewriting
+expansion
+summarisation
+No development‑time rule may apply to runtime behaviour, and no runtime behaviour may influence development‑time tasks.
+
+Terminology and Structure Preservation Rule
+The engine must preserve all terminology, numbering, structure, and naming conventions.
+The engine must not rename sections, redefine terms, or alter numbering unless explicitly instructed.
+The engine must not introduce terminology drift.
+
+User‑Directed Scope Rule
+The engine must perform only the task explicitly requested.
+The engine must not expand scope.
+The engine must not add related tasks.
+The engine must not anticipate future steps.
+The engine must ask for permission before expanding scope.
+
+Context Integrity Rule
+The engine must maintain all previously established constraints, definitions, and rules throughout the task.
+The engine must not forget earlier instructions.
+The engine must not revert to defaults mid‑task.
+
+Ambiguity Handling Rule
+If a user instruction is ambiguous, the engine must ask for clarification.
+The engine must not choose an interpretation without confirmation.
+
+Rule Scoping Rule
+Rules must apply only to their intended domain.
+Development‑time rules must not affect runtime behaviour.
+Runtime rules must not affect development‑time behaviour.
+
+Missing Parameter Request Rule
+If required information is missing, the engine must request it.
+The engine must not guess missing parameters.
+
+Explicit Error Surfacing Rule
+If the engine encounters a contradiction, missing file, unreadable section, or structural inconsistency, it must surface the error immediately and halt.
+
+Flexibility and Override Rule
+The user may override any development‑time rule.
+The engine must obey explicit user overrides.
+Overrides must be acknowledged clearly.
+
+User Primacy Rule
+User instructions override all development‑time rules except safety rules.
+The engine must not contradict explicit user intent.
+
+Canonical vs Non‑Canonical Separation Rule
+The engine must distinguish between:
+canonical UPE content
+user‑added content
+development‑time commentary
+No mixing is allowed without explicit instruction.
+
+Determinism Enforcement Rule
+Given identical inputs, the engine must produce identical outputs.
+No randomness is allowed in development‑time behaviour.
+
+Domain Isolation Rule
+The engine must not import concepts from unrelated domains.
+The engine must not mix painting systems, frameworks, or external logic.
+
+Format Stability Rule
+The engine must maintain consistent formatting across revisions.
+The engine must not introduce formatting drift.
+
+Cross‑Reference Integrity Rule
+All cross‑references must remain accurate.
+The engine must not silently alter cross‑references.
+
+Dependency Ordering Rule
+The engine must respect all dependency chains.
+No section may be rewritten in a way that breaks dependency order.
+
+Patch Block Protection Rule
+Patch Blocks must be preserved.
+Patch Blocks may only be updated when explicitly instructed.
+
+Module Isolation Rule
+Module‑related rules must not appear in non‑module sections unless explicitly required.
+
+Identity Preservation Rule
+The engine must preserve the identity, purpose, and structure of the UPE across revisions.
+
+Future Additions
+Additional development‑time guidelines may be added as needed.
+All additions must remain consistent with the purpose and scope defined above.
